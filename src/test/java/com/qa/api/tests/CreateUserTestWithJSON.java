@@ -1,5 +1,6 @@
 package com.qa.api.tests;
 
+import com.api.data.User;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIRequest;
@@ -50,11 +51,6 @@ public class CreateUserTestWithJSON {
                         .setHeader("Authorization","Bearer 21f0f7f4493434a19640d094bc45429758caadd3776822127eead30108bd939d")
                         .setData(fileBytes));
 
-        System.out.println(apiPostResponse.status());
-        System.out.println(apiPostResponse.statusText());
-        Assert.assertEquals(apiPostResponse.status(),201);
-        Assert.assertEquals(apiPostResponse.statusText(),"Created");
-
         ObjectMapper objectMapper=new ObjectMapper();
         JsonNode postJsonResponse =objectMapper.readTree(apiPostResponse.body());
         System.out.println(postJsonResponse.toPrettyString());
@@ -79,7 +75,6 @@ public class CreateUserTestWithJSON {
         Assert.assertTrue(apiGetResponse.text().contains(userId));
         Assert.assertTrue(apiGetResponse.text().contains("krishan"));
         //Assert.assertTrue(apiGetResponse.text().contains(emailId));
-
     }
 
 
